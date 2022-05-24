@@ -8,7 +8,12 @@ import { FormBuilder } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, ComponentsModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ComponentsModule,
+    BrowserAnimationsModule,
+  ],
   providers: [FormBuilder],
   bootstrap: [AppComponent],
 })

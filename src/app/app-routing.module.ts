@@ -5,7 +5,8 @@ import { AuthModule } from '@auth/auth.module';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('@auth/auth.module').then((m): AuthModule => m.AuthModule),
+    loadChildren: () =>
+      import('@auth/auth.module').then((m): AuthModule => m.AuthModule),
   },
 ];
 

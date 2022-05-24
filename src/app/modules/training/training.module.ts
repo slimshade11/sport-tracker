@@ -5,17 +5,13 @@ import { CurrentTrainingComponent } from './components/current-training/current-
 import { NewTrainingComponent } from './components/new-training/new-training.component';
 import { PastTrainingsComponent } from './components/past-trainings/past-trainings.component';
 
-
-
 @NgModule({
   declarations: [
     TrainingViewComponent,
     CurrentTrainingComponent,
     NewTrainingComponent,
-    PastTrainingsComponent
+    PastTrainingsComponent,
   ],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule],
 })
-export class TrainingModule { }
+export class TrainingModule {}
