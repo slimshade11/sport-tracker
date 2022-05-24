@@ -18,7 +18,13 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": ["es2020", "dom"]
+    "lib": ["es2020", "dom"],
+    "paths": {
+      "@auth/*": ["src/app/modules/auth/*"],
+      "@training/*": ["src/app/modules/training/*"],
+      "@constants/*": ["src/app/shared/constants/*"],
+      "@components/*": ["src/app/shared/components/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
