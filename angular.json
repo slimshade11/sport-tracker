@@ -30,10 +30,13 @@
             "styles": [
               "./node_modules/primeflex/primeflex.min.css",
               "./node_modules/primeicons/primeicons.css",
-              "./node_modules/primeng/resources/themes/vela-green/theme.css",
+              "./node_modules/primeng/resources/themes/arya-blue/theme.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/assets/sass"]
+            }
           },
           "configurations": {
             "production": {

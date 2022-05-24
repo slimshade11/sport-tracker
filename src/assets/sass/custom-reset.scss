@@ -1,0 +1,44 @@
+@use 'abstracts' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+}
+
+*::-webkit-scrollbar {
+  width: 0.25rem;
+  background-color: $gray;
+}
+
+*::-webkit-scrollbar-thumb {
+  width: 0.25rem;
+  background-color: $blue-navy;
+}
+
+html {
+  font-size: 16px;
+  color: $main-font-color;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #edf2f6, #ffffff);
+  font-family: 'Kanit', sans-serif;
+}
+
+fieldset {
+  border: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
