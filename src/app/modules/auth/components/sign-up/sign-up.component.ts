@@ -11,6 +11,7 @@ import { takeUntil, tap } from 'rxjs';
 })
 export class SignUpComponent extends DestroyComponent implements OnInit {
   form!: FormGroup;
+  isAgree: boolean = false;
 
   constructor(private signUpFormService: SignUpFormService) {
     super();
@@ -29,6 +30,12 @@ export class SignUpComponent extends DestroyComponent implements OnInit {
         takeUntil(this.destroy$),
       )
       .subscribe();
+  }
+
+  // TODO: Finish handling checkbox button
+
+  isAgreement(): void {
+    this.isAgree = !this.isAgree;
   }
 
   onSubmit(): void {

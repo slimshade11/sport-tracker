@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
 import { FormService } from '@services/form.service';
 
 @Injectable({
@@ -12,8 +13,13 @@ export class SignUpFormService extends FormService {
 
   get config(): any {
     return {
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      username: [
+        '',
+        [Validators.required, Validators.minLength(5), Validators.maxLength(15)],
+      ],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      birthday: ['', [Validators.required]],
+      agree: ['', Validators.required],
     };
   }
 }

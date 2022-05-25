@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from '@components/header/header.component';
+import { DestroyComponent } from '@components/destroy/destroy.component';
+// PrimeNg Modules
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { DestroyComponent } from '@components/destroy/destroy.component';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [HeaderComponent, DestroyComponent],
@@ -14,18 +16,20 @@ import { DestroyComponent } from '@components/destroy/destroy.component';
     CommonModule,
     MenubarModule,
     InputTextModule,
-    PasswordModule,
     ButtonModule,
     ProgressSpinnerModule,
+    CalendarModule,
+    CheckboxModule,
   ],
   exports: [
     HeaderComponent,
     MenubarModule,
     InputTextModule,
-    PasswordModule,
     ButtonModule,
     ProgressSpinnerModule,
     DestroyComponent,
+    CalendarModule,
+    CheckboxModule,
   ],
 })
 export class ComponentsModule {}
