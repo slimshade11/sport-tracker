@@ -32,13 +32,9 @@ export class SignUpComponent extends DestroyComponent implements OnInit {
       .subscribe();
   }
 
-  // TODO: Finish handling checkbox button
-
-  isAgreement(): void {
-    this.isAgree = !this.isAgree;
-  }
-
   onSubmit(): void {
-    console.log(this.form.value);
+    if (this.isAgree) {
+      console.log(this.form.value);
+    }
   }
 }
