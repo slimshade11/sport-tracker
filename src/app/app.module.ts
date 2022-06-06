@@ -5,6 +5,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 import { ComponentsModule } from '@components/components.module';
 import { FormBuilder } from '@angular/forms';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,7 @@ import { FormBuilder } from '@angular/forms';
     AppRoutingModule,
     ComponentsModule,
     BrowserAnimationsModule,
+    MenubarModule,
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent],

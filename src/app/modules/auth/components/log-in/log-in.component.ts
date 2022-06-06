@@ -31,6 +31,8 @@ export class LogInComponent extends DestroyComponent implements OnInit {
       .subscribe();
   }
 
+  navigateToLoginPage(): void {}
+
   onSubmit(): void {
     console.log(this.form.value);
   }
