@@ -14,6 +14,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [HeaderComponent, DestroyComponent],
@@ -29,6 +30,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
     CardModule,
     MultiSelectModule,
     ProgressBarModule,
+    DynamicDialogModule,
   ],
   exports: [
     HeaderComponent,
@@ -43,6 +45,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
     CardModule,
     MultiSelectModule,
     ProgressBarModule,
+    DynamicDialogModule,
   ],
 })
 export class ComponentsModule {}
