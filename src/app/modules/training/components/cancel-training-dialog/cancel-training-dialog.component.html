@@ -1,6 +1,15 @@
-<div class="text-center">
-  <div class="flex">
-    <p-button styleClass="p-button-primary mr-3" label="Yes"></p-button>
-    <p-button styleClass="p-button-secondary" label="no"></p-button>
-  </div>
+<div class="mb-4">
+  You already have done <span class="font-medium">{{ progress }}% progress</span>
+</div>
+<div class="flex mt-3">
+  <p-button
+    (onClick)="onDialogButtonClick(true)"
+    styleClass="p-button-primary mr-3"
+    label="Yes"
+  ></p-button>
+  <p-button
+    (onClick)="onDialogButtonClick(false)"
+    styleClass="p-button-secondary"
+    label="no"
+  ></p-button>
 </div>

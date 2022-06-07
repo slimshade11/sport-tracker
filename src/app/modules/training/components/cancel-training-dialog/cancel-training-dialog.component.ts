@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-cancel-training-dialog',
@@ -7,5 +7,11 @@ import { DialogService } from 'primeng/dynamicdialog';
   styleUrls: ['./cancel-training-dialog.component.scss'],
 })
 export class CancelTrainingDialogComponent {
-  constructor(private dialogService: DialogService) {}
+  progress = this.config.data.progress;
+
+  constructor(public config: DynamicDialogConfig, public ref: DynamicDialogRef) {}
+
+  onDialogButtonClick(val: boolean): void {
+    this.ref.close(val);
+  }
 }

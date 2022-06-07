@@ -5,6 +5,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 import { ComponentsModule } from '@components/components.module';
 import { MenubarModule } from 'primeng/menubar';
+import { UntypedFormBuilder } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,5 +17,6 @@ import { MenubarModule } from 'primeng/menubar';
     MenubarModule,
   ],
   bootstrap: [AppComponent],
+  providers: [UntypedFormBuilder],
 })
 export class AppModule {}
