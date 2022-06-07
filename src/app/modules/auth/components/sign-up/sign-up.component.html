@@ -44,23 +44,23 @@
         <p-calendar id="calendar" styleClass="w-full" formControlName="birthday">
         </p-calendar>
       </div>
-    </form>
-    <div class="mt-5">
-      <p-checkbox
-        label="Agree to Terms and Conditions"
-        [binary]="true"
-        [(ngModel)]="isAgree"
-      ></p-checkbox>
-      <div class="mt-3">
-        <p-button
-          [disabled]="!form.valid"
-          styleClass="w-full"
-          type="button"
-          label="Submit"
-          (onClick)="onSubmit()"
-        ></p-button>
+      <div class="mt-5">
+        <p-checkbox
+          label="Agree to Terms and Conditions"
+          [binary]="true"
+          [formControl]="$any(form.controls['agree'])"
+        ></p-checkbox>
+        <div class="mt-3">
+          <p-button
+            [disabled]="!form.valid"
+            styleClass="w-full"
+            type="button"
+            label="Submit"
+            (onClick)="onSubmit()"
+          ></p-button>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 </ng-container>
 <ng-template #loading>

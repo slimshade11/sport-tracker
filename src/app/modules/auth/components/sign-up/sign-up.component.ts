@@ -33,8 +33,6 @@ export class SignUpComponent extends DestroyComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.isAgree) {
-      console.log(this.form.value);
-    }
+    console.log(this.form.value);
   }
 }

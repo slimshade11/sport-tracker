@@ -19,6 +19,7 @@ export class SignUpFormService extends FormService {
       ],
       password: ['', [Validators.required, Validators.minLength(5)]],
       birthday: ['', [Validators.required]],
+      agree: [null, [Validators.required]],
     };
   }
 }
