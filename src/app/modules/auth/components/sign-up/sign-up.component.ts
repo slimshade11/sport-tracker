@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { SignUpFormService } from '@auth/services/sign-up-form.service';
 import { DestroyComponent } from '@components/destroy/destroy.component';
 import { takeUntil, tap } from 'rxjs';
@@ -10,7 +10,7 @@ import { takeUntil, tap } from 'rxjs';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent extends DestroyComponent implements OnInit {
-  form!: FormGroup;
+  form!: UntypedFormGroup;
   isAgree: boolean = false;
 
   constructor(private signUpFormService: SignUpFormService) {

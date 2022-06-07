@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { FormService } from '@services/form.service';
 
@@ -7,7 +7,7 @@ import { FormService } from '@services/form.service';
   providedIn: 'root',
 })
 export class SignUpFormService extends FormService {
-  constructor(protected override formBuilder: FormBuilder) {
+  constructor(protected override formBuilder: UntypedFormBuilder) {
     super(formBuilder);
   }
 

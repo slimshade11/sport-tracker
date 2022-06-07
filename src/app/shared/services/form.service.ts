@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export abstract class FormService {
-  protected _form!: FormGroup;
-  protected _form$: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(
+  protected _form!: UntypedFormGroup;
+  protected _form$: BehaviorSubject<UntypedFormGroup> = new BehaviorSubject<UntypedFormGroup>(
     this._form,
   );
 
-  protected constructor(protected formBuilder: FormBuilder) {}
+  protected constructor(protected formBuilder: UntypedFormBuilder) {}
 
   abstract get config(): any;
 
@@ -20,7 +20,7 @@ export abstract class FormService {
     this._form$?.next(this._form);
   }
 
-  form$(): Observable<FormGroup> {
+  form$(): Observable<UntypedFormGroup> {
     return this._form$.asObservable();
   }
 }

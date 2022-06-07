@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { FormService } from '@services/form.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LogInFormService extends FormService {
-  constructor(protected override formBuilder: FormBuilder) {
+  constructor(protected override formBuilder: UntypedFormBuilder) {
     super(formBuilder);
   }
 

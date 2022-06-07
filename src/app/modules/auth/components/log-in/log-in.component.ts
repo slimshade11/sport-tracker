@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { LogInFormService } from '@auth/services/log-in-form.service';
 import { DestroyComponent } from '@components/destroy/destroy.component';
 import { takeUntil, tap } from 'rxjs';
@@ -10,7 +10,7 @@ import { takeUntil, tap } from 'rxjs';
   styleUrls: ['./log-in.component.scss'],
 })
 export class LogInComponent extends DestroyComponent implements OnInit {
-  form!: FormGroup;
+  form!: UntypedFormGroup;
 
   constructor(private logInFormService: LogInFormService) {
     super();
@@ -25,7 +25,7 @@ export class LogInComponent extends DestroyComponent implements OnInit {
     this.logInFormService
       .form$()
       .pipe(
-        tap((form: FormGroup) => (this.form = form)),
+        tap((form: UntypedFormGroup) => (this.form = form)),
         takeUntil(this.destroy$),
       )
       .subscribe();
