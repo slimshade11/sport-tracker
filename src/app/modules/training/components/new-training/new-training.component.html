@@ -1,5 +1,19 @@
-<div class="container-max-width-md">
-  <p-card header="Get Shit Done*">
-    <p-button styleClass="w-full" label="start"></p-button>
+<div class="container-max-width-sm">
+  <p-card header="Get Shit Done*"
+    ><p-multiSelect
+      [options]="trainingList"
+      [(ngModel)]="selectedTraining"
+      optionLabel="name"
+      defaultLabel="Select a training"
+      styleClass="w-full"
+    ></p-multiSelect>
+    <div class="mt-3">
+      <p-button
+        styleClass="w-full"
+        label="start"
+        type="submit"
+        (onClick)="onStartTraining()"
+      ></p-button>
+    </div>
   </p-card>
 </div>

@@ -13,6 +13,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { TabViewModule } from 'primeng/tabview';
 import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [HeaderComponent, DestroyComponent],
@@ -27,6 +28,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     TabViewModule,
     CardModule,
     MultiSelectModule,
+    ProgressBarModule,
   ],
   exports: [
     HeaderComponent,
@@ -40,6 +42,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     CheckboxModule,
     CardModule,
     MultiSelectModule,
+    ProgressBarModule,
   ],
 })
 export class ComponentsModule {}

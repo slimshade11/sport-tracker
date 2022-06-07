@@ -6,6 +6,7 @@ import { NewTrainingComponent } from '@training/components/new-training/new-trai
 import { PastTrainingsComponent } from '@training/components/past-trainings/past-trainings.component';
 import { TrainingRoutingModule } from '@training/training-routing.module';
 import { ComponentsModule } from '@components/components.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,6 @@ import { ComponentsModule } from '@components/components.module';
     NewTrainingComponent,
     PastTrainingsComponent,
   ],
-  imports: [CommonModule, TrainingRoutingModule, ComponentsModule],
+  imports: [CommonModule, TrainingRoutingModule, ComponentsModule, FormsModule],
 })
 export class TrainingModule {}

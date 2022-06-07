@@ -1,1 +1,12 @@
-<p>current-training works!</p>
+<div class="mt-3">
+  <div class="container-max-width-sm bg-white card-shadow radius p-4">
+    <div class="text-center">
+      <h1>{{ progress }}%</h1>
+      <p-progressBar [value]="progress" [showValue]="false"></p-progressBar>
+      <p>Work shit out!</p>
+    </div>
+    <div class="mt-5">
+      <p-button styleClass="p-button-primary w-full" label="Stop"></p-button>
+    </div>
+  </div>
+</div>

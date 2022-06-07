@@ -1,10 +1,16 @@
-<div class="container-max-width-lg card-shadow">
-  <p-tabView>
-    <p-tabPanel header="New Exercise">
-      <app-new-training></app-new-training>
-    </p-tabPanel>
-    <p-tabPanel header="Past Exercises">
-      <app-past-trainings></app-past-trainings>
-    </p-tabPanel>
-  </p-tabView>
-</div>
+<ng-container *ngIf="!ongoingTraining">
+  <div class="container-max-width-lg card-shadow">
+    <p-tabView>
+      <p-tabPanel header="New Exercise">
+        <app-new-training (startTraining)="startTraining()"></app-new-training>
+      </p-tabPanel>
+      <p-tabPanel header="Past Exercises">
+        <app-past-trainings></app-past-trainings>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="ongoingTraining">
+  <app-current-training></app-current-training>
+</ng-container>

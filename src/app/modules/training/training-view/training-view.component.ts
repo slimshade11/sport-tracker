@@ -5,8 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './training-view.component.html',
   styleUrls: ['./training-view.component.scss'],
 })
-export class TrainingViewComponent implements OnInit {
-  constructor() {}
+export class TrainingViewComponent {
+  ongoingTraining = false;
 
-  ngOnInit(): void {}
+  startTraining(): void {
+    this.ongoingTraining = true;
+  }
 }
