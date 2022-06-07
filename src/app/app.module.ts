@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 import { ComponentsModule } from '@components/components.module';
-import { UntypedFormBuilder } from '@angular/forms';
 import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { MenubarModule } from 'primeng/menubar';
     BrowserAnimationsModule,
     MenubarModule,
   ],
-  providers: [UntypedFormBuilder],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

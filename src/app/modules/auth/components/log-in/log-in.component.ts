@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
 import { LogInFormService } from '@auth/services/log-in-form.service';
 import { DestroyComponent } from '@components/destroy/destroy.component';
 import { takeUntil, tap } from 'rxjs';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-log-in',
