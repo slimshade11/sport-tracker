@@ -13,7 +13,7 @@ export class SignUpFormService extends FormService {
 
   get config(): any {
     return {
-      username: [
+      email: [
         '',
         [Validators.required, Validators.minLength(5), Validators.maxLength(15)],
       ],

@@ -3,6 +3,7 @@ import { LogInFormService } from '@auth/services/log-in-form.service';
 import { DestroyComponent } from '@components/destroy/destroy.component';
 import { takeUntil, tap } from 'rxjs';
 import { UntypedFormGroup } from '@angular/forms';
+import { AuthService } from '@auth/services/auth.service';
 
 @Component({
   selector: 'app-log-in',
@@ -12,7 +13,10 @@ import { UntypedFormGroup } from '@angular/forms';
 export class LogInComponent extends DestroyComponent implements OnInit {
   form!: UntypedFormGroup;
 
-  constructor(private logInFormService: LogInFormService) {
+  constructor(
+    private logInFormService: LogInFormService,
+    private authService: AuthService,
+  ) {
     super();
   }
 
@@ -34,6 +38,11 @@ export class LogInComponent extends DestroyComponent implements OnInit {
   navigateToLoginPage(): void {}
 
   onSubmit(): void {
-    console.log(this.form.value);
+    const login = {
+      email: this.form.value.email,
+      password: this.form.value.password,
+    };
+
+    this.authService.login(login);
   }
 }

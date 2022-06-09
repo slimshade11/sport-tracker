@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { User } from '@auth/interfaces/user.interface';
+import { AuthService } from '@auth/services/auth.service';
 import { SignUpFormService } from '@auth/services/sign-up-form.service';
 import { DestroyComponent } from '@components/destroy/destroy.component';
 import { takeUntil, tap } from 'rxjs';
@@ -11,9 +13,12 @@ import { takeUntil, tap } from 'rxjs';
 })
 export class SignUpComponent extends DestroyComponent implements OnInit {
   form!: UntypedFormGroup;
-  isAgree: boolean = false;
+  maxDate!: Date;
 
-  constructor(private signUpFormService: SignUpFormService) {
+  constructor(
+    private signUpFormService: SignUpFormService,
+    private authService: AuthService,
+  ) {
     super();
   }
 
@@ -30,9 +35,12 @@ export class SignUpComponent extends DestroyComponent implements OnInit {
         takeUntil(this.destroy$),
       )
       .subscribe();
+
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
+    this.authService.registerUser(this.form.value);
   }
 }
