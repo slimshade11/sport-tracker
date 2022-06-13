@@ -7,6 +7,7 @@ import { ComponentsModule } from '@components/components.module';
 import { MenubarModule } from 'primeng/menubar';
 import { UntypedFormBuilder } from '@angular/forms';
 import { AuthService } from '@auth/services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,6 @@ import { AuthService } from '@auth/services/auth.service';
     MenubarModule,
   ],
   bootstrap: [AppComponent],
-  providers: [UntypedFormBuilder, AuthService],
+  providers: [UntypedFormBuilder, AuthService, MessageService],
 })
 export class AppModule {}
