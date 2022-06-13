@@ -12,7 +12,6 @@ export class MenubarService {
   setMenuLinks(isLoggedIn: boolean): MenuItem[] {
     if (isLoggedIn) {
       MenuLinks.authenticatedLinks[1].command = () => this.authService.logout();
-
       return MenuLinks.authenticatedLinks;
     }
 

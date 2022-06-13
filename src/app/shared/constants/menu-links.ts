@@ -5,11 +5,6 @@ export const MenuLinks: any = {
       icon: 'pi pi-fw pi-sign-in',
       routerLink: '/login',
     },
-    {
-      label: 'Signup',
-      icon: 'pi pi-fw pi-sign-in',
-      routerLink: '/signup',
-    },
   ],
   authenticatedLinks: [
     {

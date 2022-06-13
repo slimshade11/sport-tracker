@@ -26,7 +26,7 @@ export class HeaderComponent extends DestroyComponent implements OnInit {
 
   handleLoggedInLinks(): void {
     this.authService
-      .getIsLoggedIn()
+      .getIsLoggedIn$()
       .pipe(
         tap((isLoggedIn) => {
           this.menuLinks = this.menubarService.setMenuLinks(isLoggedIn);

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { LoadChildrenCallback, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthModule } from '@auth/auth.module';
 import { TrainingModule } from '@training/training.module';
+import { AuthGuard } from '@guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'training',
+    canActivate: [AuthGuard],
     loadChildren: (): Promise<any> =>
       import('@training/training.module').then(
         ({ TrainingModule }): TrainingModule => TrainingModule,
@@ -21,5 +23,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [AuthGuard],
 })
 export class AppRoutingModule {}
