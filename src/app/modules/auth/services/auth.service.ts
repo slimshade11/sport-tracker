@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthData } from '@auth/interfaces/auth-data.interface';
 import { User } from '@auth/interfaces/user.interface';
+import { PersistanceService } from '@services/persistance.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -9,9 +10,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService {
   private user: User | null = null;
-  private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false,
+  );
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private persistanceService: PersistanceService,
+  ) {}
 
   registerUser(authData: AuthData): void {
     this.user = {
@@ -34,7 +40,9 @@ export class AuthService {
 
   logout(): void {
     this.user = null;
-    this.isLoggedIn.next(false);
+    this.isLoggedIn$.next(false);
+
+    this.persistanceService.set('isLoggedIn', false);
   }
 
   getUser(): any {
@@ -44,11 +52,17 @@ export class AuthService {
   }
 
   getIsLoggedIn$(): Observable<boolean> {
-    return this.isLoggedIn.asObservable();
+    return this.isLoggedIn$.asObservable();
   }
 
   authSuccess(): void {
-    this.isLoggedIn.next(true);
+    this.isLoggedIn$.next(true);
+    this.persistanceService.set('isLoggedIn', true);
     this.router.navigate(['/training']);
+  }
+
+  getIsLoggedIn(): void {
+    const isLoggedIn = this.persistanceService.get('isLoggedIn');
+    this.isLoggedIn$.next(isLoggedIn);
   }
 }

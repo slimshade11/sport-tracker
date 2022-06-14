@@ -12,6 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'training',
+    canActivate: [AuthGuard],
     loadChildren: (): Promise<any> =>
       import('@training/training.module').then(
         ({ TrainingModule }): TrainingModule => TrainingModule,
@@ -25,5 +26,3 @@ const routes: Routes = [
   providers: [AuthGuard],
 })
 export class AppRoutingModule {}
-
-// canActivate: [AuthGuard], for training lazy module
