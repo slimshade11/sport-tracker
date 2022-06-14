@@ -16,6 +16,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [HeaderComponent, DestroyComponent],
@@ -33,6 +34,7 @@ import { ToastModule } from 'primeng/toast';
     ProgressBarModule,
     DynamicDialogModule,
     ToastModule,
+    RadioButtonModule,
   ],
   exports: [
     HeaderComponent,
@@ -49,6 +51,7 @@ import { ToastModule } from 'primeng/toast';
     ProgressBarModule,
     DynamicDialogModule,
     ToastModule,
+    RadioButtonModule,
   ],
 })
 export class ComponentsModule {}

@@ -1,19 +1,25 @@
 <div class="container-max-width-sm">
-  <p-card header="Get Shit Done*"
-    ><p-multiSelect
-      [options]="trainingList"
-      [(ngModel)]="selectedTraining"
-      optionLabel="name"
-      defaultLabel="Select a training"
-      styleClass="w-full"
-    ></p-multiSelect>
-    <div class="mt-3">
-      <p-button
-        styleClass="w-full"
-        label="start"
-        type="submit"
-        (onClick)="onStartTraining()"
-      ></p-button>
+  <ng-container *ngIf="form; else loading">
+    <form [formGroup]="form" (ngSubmit)="onStartTraining()">
+      <p-card header="Get Your Job Done!">
+        <div class="text-center font-medium text-lg">Pick workout:</div>
+        <div class="flex my-5 justify-content-evenly">
+          <ng-container *ngFor="let training of trainingList">
+            <p-radioButton
+              [formControlName]="training.id"
+              [label]="training.name"
+              [value]="training.id"
+            ></p-radioButton>
+          </ng-container>
+        </div>
+        <div class="mt-3">
+          <p-button styleClass="w-full" label="start" type="submit"></p-button>
+        </div>
+      </p-card></form
+  ></ng-container>
+  <ng-template #loading>
+    <div class="flex justify-content-center">
+      <p-progressSpinner></p-progressSpinner>
     </div>
-  </p-card>
+  </ng-template>
 </div>

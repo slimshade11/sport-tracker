@@ -1,14 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import { DestroyComponent } from '@components/destroy/destroy.component';
+import { Exercise } from '@training/interfaces/exercise.interface';
+import { TrainingService } from '@training/services/training.service';
+import { tap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-training-view',
   templateUrl: './training-view.component.html',
   styleUrls: ['./training-view.component.scss'],
 })
-export class TrainingViewComponent {
+export class TrainingViewComponent extends DestroyComponent implements OnInit {
   ongoingTraining = false;
 
-  startTraining(): void {
-    this.ongoingTraining = true;
+  constructor(private trainingService: TrainingService) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.trainingService.exerciseChanged
+      .pipe(
+        tap((exercise: Exercise | undefined) => {
+          if (exercise) {
+            this.ongoingTraining = true;
+          } else {
+            this.ongoingTraining = false;
+          }
+        }),
+        takeUntil(this.destroy$),
+      )
+      .subscribe();
   }
 }

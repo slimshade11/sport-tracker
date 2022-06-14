@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TrainingViewComponent } from '@training/training-view/training-view.component';
 import { CurrentTrainingComponent } from '@training/components/current-training/current-training.component';
@@ -19,6 +20,12 @@ import { CancelTrainingDialogComponent } from '@training/components/cancel-train
     CancelTrainingDialogComponent,
   ],
   providers: [DialogService],
-  imports: [CommonModule, TrainingRoutingModule, ComponentsModule, FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TrainingRoutingModule,
+    ComponentsModule,
+    FormsModule,
+  ],
 })
 export class TrainingModule {}
