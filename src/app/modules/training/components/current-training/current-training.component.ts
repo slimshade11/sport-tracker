@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { TrainingService } from '@training/services/training.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CancelTrainingDialogComponent } from '../cancel-training-dialog/cancel-training-dialog.component';
 
@@ -12,20 +13,24 @@ export class CurrentTrainingComponent implements OnInit {
   trainingInterval!: ReturnType<typeof setTimeout>;
   progress = 0;
 
-  constructor(private dialogService: DialogService) {}
+  constructor(
+    private dialogService: DialogService,
+    private trainingService: TrainingService,
+  ) {}
 
   ngOnInit(): void {
     this.interval();
   }
 
   interval(): void {
+    const step = (this.trainingService.getCurrentExercise().duration / 100) * 1000;
     this.trainingInterval = setInterval(() => {
-      this.progress += 5;
+      this.progress += 1;
 
       if (this.progress >= 100) {
         clearInterval(this.trainingInterval);
       }
-    }, 1000);
+    }, step);
   }
 
   onStopTraining(): void {

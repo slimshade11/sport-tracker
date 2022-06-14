@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { FormService } from '@services/form.service';
 
 @Injectable({
@@ -12,9 +12,7 @@ export class NewTrainingFormService extends FormService {
 
   get config(): any {
     return {
-      crunches: [''],
-      touchToes: [''],
-      burpees: [''],
+      exercise: ['', Validators.required],
     };
   }
 }

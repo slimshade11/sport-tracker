@@ -36,6 +36,6 @@ export class NewTrainingComponent extends DestroyComponent implements OnInit {
   }
 
   onStartTraining(): void {
-    this.trainingService.startExercise('dwa');
+    this.trainingService.startExercise(this.form.value.exercise);
   }
 }

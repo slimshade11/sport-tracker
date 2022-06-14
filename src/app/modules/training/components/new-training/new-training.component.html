@@ -6,14 +6,20 @@
         <div class="flex my-5 justify-content-evenly">
           <ng-container *ngFor="let training of trainingList">
             <p-radioButton
-              [formControlName]="training.id"
+              [formControlName]="training.groupName"
               [label]="training.name"
               [value]="training.id"
+              [name]="training.groupName"
             ></p-radioButton>
           </ng-container>
         </div>
         <div class="mt-3">
-          <p-button styleClass="w-full" label="start" type="submit"></p-button>
+          <p-button
+            [disabled]="!form.valid"
+            styleClass="w-full"
+            label="start"
+            type="submit"
+          ></p-button>
         </div>
       </p-card></form
   ></ng-container>
