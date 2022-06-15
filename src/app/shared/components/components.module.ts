@@ -17,6 +17,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [HeaderComponent, DestroyComponent],
@@ -35,6 +36,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     DynamicDialogModule,
     ToastModule,
     RadioButtonModule,
+    TableModule,
   ],
   exports: [
     HeaderComponent,
@@ -52,6 +54,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     DynamicDialogModule,
     ToastModule,
     RadioButtonModule,
+    TableModule,
   ],
 })
 export class ComponentsModule {}

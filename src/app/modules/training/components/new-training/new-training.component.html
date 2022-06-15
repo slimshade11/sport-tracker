@@ -1,8 +1,9 @@
-<div class="container-max-width-sm">
+<div class="container-max-width-md">
   <ng-container *ngIf="form; else loading">
     <form [formGroup]="form" (ngSubmit)="onStartTraining()">
-      <p-card header="Get Your Job Done!">
-        <div class="text-center font-medium text-lg">Pick workout:</div>
+      <p-card>
+        <h2 class="text-center">Get your job done!</h2>
+        <div class="text-center font-medium text-lg mt-6">Pick workout:</div>
         <div class="flex my-5 justify-content-evenly">
           <ng-container *ngFor="let training of trainingList">
             <p-radioButton

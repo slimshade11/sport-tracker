@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { NewTrainingFormService } from '@training/services/new-training-form.service';
 import { TrainingService } from '@training/services/training.service';

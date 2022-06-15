@@ -1,1 +1,32 @@
-<p>past-trainings works!</p>
+<ng-container *ngIf="(passedExercises | async)! as exercises; else loading">
+  <ng-container *ngIf="exercises.length; else noExercises">
+    <p-table [value]="exercises">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Calories</th>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-exercise>
+        <tr>
+          <td>{{ exercise.name }}</td>
+          <td>{{ exercise.calories | number: '1.0-0' }}</td>
+          <td>{{ exercise.date | date: 'short' }}</td>
+          <td>{{ exercise.duration | number: '1.0-4' }} sec</td>
+          <td>{{ exercise.state }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-container>
+  <ng-template #noExercises>
+    <div class="text-center">You have no exercises done yet</div>
+  </ng-template>
+</ng-container>
+<ng-template #loading>
+  <div class="flex justify-content-center">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>
