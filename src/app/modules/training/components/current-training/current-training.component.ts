@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { TrainingService } from '@training/services/training.service';
+import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
-import { CancelTrainingDialogComponent } from '../cancel-training-dialog/cancel-training-dialog.component';
+import { TrainingService } from '@training/services/training.service';
+import { CancelTrainingDialogComponent } from '@training/components/cancel-training-dialog/cancel-training-dialog.component';
 
 @Component({
   selector: 'app-current-training',
@@ -9,7 +9,6 @@ import { CancelTrainingDialogComponent } from '../cancel-training-dialog/cancel-
   styleUrls: ['./current-training.component.scss'],
 })
 export class CurrentTrainingComponent implements OnInit {
-  @Output() exitTraining: EventEmitter<void> = new EventEmitter<void>();
   trainingInterval!: ReturnType<typeof setTimeout>;
   progress = 0;
 
@@ -28,6 +27,7 @@ export class CurrentTrainingComponent implements OnInit {
       this.progress += 1;
 
       if (this.progress >= 100) {
+        this.trainingService.completeExercise();
         clearInterval(this.trainingInterval);
       }
     }, step);
@@ -43,7 +43,7 @@ export class CurrentTrainingComponent implements OnInit {
 
     dialogRef.onClose.subscribe((isEnd) => {
       if (isEnd) {
-        this.exitTraining.emit(isEnd);
+        this.trainingService.cancelExercise(this.progress);
       } else {
         this.interval();
       }
