@@ -1,6 +1,6 @@
 <ng-container *ngIf="(passedExercises | async)! as exercises; else loading">
   <ng-container *ngIf="exercises.length; else noExercises">
-    <p-table [value]="exercises">
+    <p-table [value]="exercises" [paginator]="true" [rows]="3">
       <ng-template pTemplate="header">
         <tr>
           <th>Name</th>
