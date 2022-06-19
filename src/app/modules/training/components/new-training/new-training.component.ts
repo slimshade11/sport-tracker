@@ -3,7 +3,8 @@ import { UntypedFormGroup } from '@angular/forms';
 import { NewTrainingFormService } from '@training/services/new-training-form.service';
 import { TrainingService } from '@training/services/training.service';
 import { DestroyComponent } from '@components/destroy/destroy.component';
-import { tap, takeUntil } from 'rxjs';
+import { tap, takeUntil, Observable } from 'rxjs';
+import { Exercise } from '@training/interfaces/exercise.interface';
 
 @Component({
   selector: 'app-new-training',
@@ -12,8 +13,7 @@ import { tap, takeUntil } from 'rxjs';
 })
 export class NewTrainingComponent extends DestroyComponent implements OnInit {
   form!: UntypedFormGroup;
-  trainingList = this.trainingService.getHardcodedTrainings();
-  selectedTraining = [];
+  trainingList: Observable<Exercise[]> = this.trainingService.fetchTrainings();
 
   constructor(
     private trainingService: TrainingService,
@@ -23,6 +23,10 @@ export class NewTrainingComponent extends DestroyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.buildForm();
+  }
+
+  buildForm(): void {
     this.newTrainingFormService.buildForm();
     this.newTrainingFormService
       .form$()

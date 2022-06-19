@@ -8,10 +8,17 @@ import { MenubarModule } from 'primeng/menubar';
 import { UntypedFormBuilder } from '@angular/forms';
 import { AuthService } from '@auth/services/auth.service';
 import { MessageService } from 'primeng/api';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '@environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,
     AppRoutingModule,
     ComponentsModule,

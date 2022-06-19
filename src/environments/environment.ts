@@ -4,6 +4,15 @@
 
 export const environment = {
   production: false,
+  firebase: {
+    apiKey: 'AIzaSyDfhZTMiAcEjEpIW5_tKJ6Q987ZOBVDPFE',
+    authDomain: 'sport-tracker-a5b7a.firebaseapp.com',
+    projectId: 'sport-tracker-a5b7a',
+    storageBucket: 'sport-tracker-a5b7a.appspot.com',
+    messagingSenderId: '726370097856',
+    appId: '1:726370097856:web:efa960127ab3fdd8f16b25',
+    measurementId: 'G-8WGZF0Q3BC',
+  },
 };
 
 /*

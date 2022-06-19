@@ -25,7 +25,8 @@
       "@constants/*": ["src/app/shared/constants/*"],
       "@components/*": ["src/app/shared/components/*"],
       "@services/*": ["src/app/shared/services/*"],
-      "@guards/*": ["src/app/shared/guards/*"]
+      "@guards/*": ["src/app/shared/guards/*"],
+      "@environments/*": ["src/environments/*"]
     }
   },
   "angularCompilerOptions": {

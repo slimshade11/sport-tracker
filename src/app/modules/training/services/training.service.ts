@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { HardcodedExercises } from '@training/constants/hardcodedExercises';
 import { ExerciseState } from '@training/enums/exercise-state.enum';
+import { Trainings } from '@training/enums/training-collections.enum';
 import { Exercise } from '@training/interfaces/exercise.interface';
 import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
 
@@ -11,9 +13,10 @@ export class TrainingService {
   private passedExercises$: BehaviorSubject<Exercise[]> = new BehaviorSubject<
     Exercise[]
   >([]);
-
   private currentExercise!: Exercise | null;
   public exerciseChanged: Subject<Exercise | null> = new Subject<Exercise | null>();
+
+  constructor(private db: AngularFirestore) {}
 
   getHardcodedTrainings(): Exercise[] {
     return HardcodedExercises.slice();
@@ -68,5 +71,12 @@ export class TrainingService {
 
   getPastExercises(): Observable<Exercise[]> {
     return this.passedExercises$.asObservable();
+  }
+
+  fetchTrainings(): any {
+    return this.db
+      .collection(Trainings.AVAILABLE_EXERCISES)
+      .valueChanges()
+      .subscribe((res) => console.log(res));
   }
 }
