@@ -73,7 +73,9 @@ export class TrainingService {
     return this.passedExercises$.asObservable();
   }
 
-  fetchTrainings(): any {
-    return this.db.collection(Trainings.AVAILABLE_EXERCISES).valueChanges();
+  fetchTrainings(): Observable<Exercise[]> {
+    return this.db
+      .collection<Exercise>(Trainings.AVAILABLE_EXERCISES)
+      .valueChanges();
   }
 }

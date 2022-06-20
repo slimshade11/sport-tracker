@@ -13,7 +13,9 @@ import { Exercise } from '@training/interfaces/exercise.interface';
 })
 export class NewTrainingComponent extends DestroyComponent implements OnInit {
   form!: UntypedFormGroup;
-  trainingList!: Exercise[];
+  trainingList$: Observable<Exercise[]> = this.trainingService
+    .fetchTrainings()
+    .pipe(tap((res: any) => console.log(res)));
 
   constructor(
     private trainingService: TrainingService,
@@ -24,10 +26,6 @@ export class NewTrainingComponent extends DestroyComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-
-    this.trainingService.fetchTrainings().subscribe((trainings: any) => {
-      this.trainingList = trainings;
-    });
   }
 
   buildForm(): void {
