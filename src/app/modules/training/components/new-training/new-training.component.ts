@@ -3,7 +3,7 @@ import { UntypedFormGroup } from '@angular/forms';
 import { NewTrainingFormService } from '@training/services/new-training-form.service';
 import { TrainingService } from '@training/services/training.service';
 import { DestroyComponent } from '@components/destroy/destroy.component';
-import { tap, takeUntil, Observable } from 'rxjs';
+import { tap, takeUntil, Observable, filter } from 'rxjs';
 import { Exercise } from '@training/interfaces/exercise.interface';
 
 @Component({
@@ -13,9 +13,7 @@ import { Exercise } from '@training/interfaces/exercise.interface';
 })
 export class NewTrainingComponent extends DestroyComponent implements OnInit {
   form!: UntypedFormGroup;
-  trainingList$: Observable<Exercise[]> = this.trainingService
-    .fetchTrainings()
-    .pipe(tap((res: any) => console.log(res)));
+  trainingList!: Exercise[] | null;
 
   constructor(
     private trainingService: TrainingService,
@@ -25,7 +23,19 @@ export class NewTrainingComponent extends DestroyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initializeValues();
+  }
+
+  initializeValues(): void {
+    this.fetchTrainings().pipe(takeUntil(this.destroy$)).subscribe();
     this.buildForm();
+    this.trainingService.exercisesChanged$
+      .pipe(
+        tap((exercises: Exercise[] | null) => {
+          this.trainingList = exercises;
+        }),
+      )
+      .subscribe();
   }
 
   buildForm(): void {
@@ -39,6 +49,10 @@ export class NewTrainingComponent extends DestroyComponent implements OnInit {
         takeUntil(this.destroy$),
       )
       .subscribe();
+  }
+
+  fetchTrainings(): Observable<Exercise[]> {
+    return this.trainingService.fetchTrainings();
   }
 
   onStartTraining(): void {

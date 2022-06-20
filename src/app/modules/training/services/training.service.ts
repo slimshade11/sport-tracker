@@ -4,30 +4,30 @@ import { HardcodedExercises } from '@training/constants/hardcodedExercises';
 import { ExerciseState } from '@training/enums/exercise-state.enum';
 import { Trainings } from '@training/enums/training-collections.enum';
 import { Exercise } from '@training/interfaces/exercise.interface';
-import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
+import { Subject, BehaviorSubject, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrainingService {
+  public exerciseChanged$: Subject<Exercise | null> = new Subject<Exercise | null>();
+  public exercisesChanged$: Subject<Exercise[] | null> = new Subject<
+    Exercise[] | null
+  >();
+  private currentExercise!: Exercise | null;
   private passedExercises$: BehaviorSubject<Exercise[]> = new BehaviorSubject<
     Exercise[]
   >([]);
-  private currentExercise!: Exercise | null;
-  public exerciseChanged: Subject<Exercise | null> = new Subject<Exercise | null>();
+  private exercises: Exercise[] = [];
 
   constructor(private db: AngularFirestore) {}
 
-  getHardcodedTrainings(): Exercise[] {
-    return HardcodedExercises.slice();
-  }
-
   startExercise(selectedId: string): void {
-    this.currentExercise = HardcodedExercises.find(
+    this.currentExercise = this.exercises.find(
       (exercise: Exercise) => exercise.id === selectedId,
     )!;
 
-    this.exerciseChanged.next({ ...this.currentExercise! });
+    this.exerciseChanged$.next({ ...this.currentExercise! });
   }
 
   completeExercise(): void {
@@ -37,9 +37,9 @@ export class TrainingService {
       state: ExerciseState.COMPLETED,
     };
 
-    this.updateExercises(newExercise);
+    this.addDataToDataBase(newExercise);
     this.currentExercise = null;
-    this.exerciseChanged.next(null);
+    this.exerciseChanged$.next(null);
   }
 
   cancelExercise(progress: number): void {
@@ -51,9 +51,9 @@ export class TrainingService {
       state: ExerciseState.CANCELLED,
     };
 
-    this.updateExercises(newExercise);
+    this.addDataToDataBase(newExercise);
     this.currentExercise = null;
-    this.exerciseChanged.next(null);
+    this.exerciseChanged$.next(null);
   }
 
   updateExercises(newExercise: Exercise): void {
@@ -76,6 +76,16 @@ export class TrainingService {
   fetchTrainings(): Observable<Exercise[]> {
     return this.db
       .collection<Exercise>(Trainings.AVAILABLE_EXERCISES)
-      .valueChanges();
+      .valueChanges({ idField: 'id' })
+      .pipe(
+        tap((exercises: Exercise[]) => {
+          this.exercises = exercises;
+          this.exercisesChanged$.next([...exercises]);
+        }),
+      );
+  }
+
+  private addDataToDataBase(exercise: Exercise): void {
+    this.db.collection(Trainings.FINISHED_EXERCISES).add(exercise);
   }
 }

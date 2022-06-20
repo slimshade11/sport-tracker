@@ -17,7 +17,7 @@ export class TrainingViewComponent extends DestroyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.trainingService.exerciseChanged
+    this.trainingService.exerciseChanged$
       .pipe(
         tap((exercise: Exercise | null) => {
           if (exercise) {
