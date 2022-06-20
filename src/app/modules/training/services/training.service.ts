@@ -74,9 +74,6 @@ export class TrainingService {
   }
 
   fetchTrainings(): any {
-    return this.db
-      .collection(Trainings.AVAILABLE_EXERCISES)
-      .valueChanges()
-      .subscribe((res) => console.log(res));
+    return this.db.collection(Trainings.AVAILABLE_EXERCISES).valueChanges();
   }
 }

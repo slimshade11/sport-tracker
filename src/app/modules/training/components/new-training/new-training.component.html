@@ -5,10 +5,11 @@
         <h2 class="text-center">Get your job done!</h2>
         <div class="text-center font-medium text-lg mt-6">Pick workout:</div>
         <div class="flex my-5 justify-content-evenly">
-          <ng-container *ngFor="let training of trainingList | async">
+          <ng-container *ngIf="trainingList">
             <p-radioButton
+              *ngFor="let training of trainingList"
               [formControlName]="training.groupName"
-              [label]="training.name"
+              [label]="training.name | titlecase"
               [value]="training.id"
               [name]="training.groupName"
             ></p-radioButton>
