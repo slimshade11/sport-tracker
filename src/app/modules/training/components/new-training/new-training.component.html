@@ -4,15 +4,16 @@
       <p-card>
         <h2 class="text-center">Get your job done!</h2>
         <div class="text-center font-medium text-lg mt-6">Pick workout:</div>
-        <div class="flex my-5 justify-content-evenly">
-          <ng-container *ngIf="trainingList">
-            <p-radioButton
-              *ngFor="let training of trainingList"
-              [formControlName]="training.groupName"
-              [label]="training.name | titlecase"
-              [value]="training.id"
-              [name]="training.groupName"
-            ></p-radioButton>
+        <div class="flex flex-wrap my-5 justify-content-evenly">
+          <ng-container *ngIf="trainingList$ | async as trainingList">
+            <div class="mb-3 w-6" *ngFor="let training of trainingList">
+              <p-radioButton
+                [formControlName]="training.groupName"
+                [label]="training.name | titlecase"
+                [value]="training.id"
+                [name]="training.groupName"
+              ></p-radioButton>
+            </div>
           </ng-container>
         </div>
         <div class="mt-3">

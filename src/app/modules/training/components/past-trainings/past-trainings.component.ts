@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DestroyComponent } from '@components/destroy/destroy.component';
 import { Exercise } from '@training/interfaces/exercise.interface';
 import { TrainingService } from '@training/services/training.service';
-import { Observable } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-past-trainings',
   templateUrl: './past-trainings.component.html',
   styleUrls: ['./past-trainings.component.scss'],
 })
-export class PastTrainingsComponent {
-  passedExercises: Observable<Exercise[]>;
+export class PastTrainingsComponent extends DestroyComponent implements OnInit {
+  passedExercises$: Observable<Exercise[]> =
+    this.trainignService.getPastExercises$();
 
   constructor(private trainignService: TrainingService) {
-    this.passedExercises = this.trainignService.getPastExercises();
+    super();
+  }
+
+  ngOnInit(): void {
+    this.trainignService
+      .fetchFinishedTrainings()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 }

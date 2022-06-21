@@ -1,6 +1,7 @@
-<ng-container *ngIf="(passedExercises | async)! as exercises; else loading">
+<ng-container *ngIf="(passedExercises$ | async)! as exercises; else loading">
   <ng-container *ngIf="exercises.length; else noExercises">
     <p-table [value]="exercises" [paginator]="true" [rows]="3">
+      {{ exercises }}
       <ng-template pTemplate="header">
         <tr>
           <th>Name</th>
@@ -14,7 +15,7 @@
         <tr>
           <td>{{ exercise.name }}</td>
           <td>{{ exercise.calories | number: '1.0-0' }}</td>
-          <td>{{ exercise.date | date: 'short' }}</td>
+          <td>{{ exercise.date.toMillis() | date: 'yyyy/MM/dd h:mm:ss a' }}</td>
           <td>{{ exercise.duration | number: '1.0-4' }} sec</td>
           <td>{{ exercise.state }}</td>
         </tr>
