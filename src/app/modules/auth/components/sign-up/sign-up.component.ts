@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { User } from '@auth/interfaces/user.interface';
 import { AuthService } from '@auth/services/auth.service';
 import { SignUpFormService } from '@auth/services/sign-up-form.service';
 import { DestroyComponent } from '@components/destroy/destroy.component';

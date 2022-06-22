@@ -24,6 +24,7 @@
       "@training/*": ["src/app/modules/training/*"],
       "@constants/*": ["src/app/shared/constants/*"],
       "@components/*": ["src/app/shared/components/*"],
+      "@enums/*": ["src/app/shared/enums/*"],
       "@services/*": ["src/app/shared/services/*"],
       "@guards/*": ["src/app/shared/guards/*"],
       "@environments/*": ["src/environments/*"]

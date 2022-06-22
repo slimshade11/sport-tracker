@@ -1,5 +1,7 @@
+import { ToastStatus } from '@enums/toast-status.enum';
+
 export const GuardErrorMessage = {
-  severity: 'error',
+  severity: ToastStatus.ERROR,
   summary: 'Something went wrong',
   detail: 'Please check if you logged in properly',
 };

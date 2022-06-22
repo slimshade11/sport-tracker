@@ -5,6 +5,11 @@ import { LogInComponent } from '@auth/components/log-in/log-in.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
     path: 'signup',
     component: SignUpComponent,
   },

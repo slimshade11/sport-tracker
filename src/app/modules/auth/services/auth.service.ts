@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthData } from '@auth/interfaces/auth-data.interface';
-import { User } from '@auth/interfaces/user.interface';
 import { PersistanceService } from '@services/persistance.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ToastService } from '@services/toast.service';
+import { ToastStatus } from '@enums/toast-status.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private user: User | null = null;
   private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false,
   );
@@ -17,38 +18,56 @@ export class AuthService {
   constructor(
     private router: Router,
     private persistanceService: PersistanceService,
+    private authFire: AngularFireAuth,
+    private toastService: ToastService,
   ) {}
 
   registerUser(authData: AuthData): void {
-    this.user = {
-      email: authData.email,
-      password: authData.password,
-      userId: Math.round(Math.random() * 10000).toString(),
-    };
-
-    this.authSuccess();
+    this.authFire
+      .createUserWithEmailAndPassword(authData.email, authData.password)
+      .then((result) => {
+        this.toastService.showInfoMessage(
+          ToastStatus.SUCCESS,
+          'Sukces',
+          'Rejestracja przebiegła pomyślnie',
+        );
+        this.authSuccess();
+      })
+      .catch((error) => {
+        this.toastService.showInfoMessage(
+          ToastStatus.ERROR,
+          'Błąd',
+          'Formularz został niepoprawnie wypełniony',
+        );
+      });
   }
 
   login(authData: AuthData): void {
-    this.user = {
-      email: authData.email,
-      password: authData.password,
-    };
-
-    this.authSuccess();
+    this.authFire
+      .signInWithEmailAndPassword(authData.email, authData.password)
+      .then((result) => {
+        this.toastService.showInfoMessage(
+          ToastStatus.SUCCESS,
+          'Sukces!',
+          'Zalogowano pomyślnie',
+        );
+        this.authSuccess();
+      })
+      .catch((error) => {
+        console.log(error);
+        this.toastService.showInfoMessage(
+          ToastStatus.ERROR,
+          'Błąd',
+          'Wprowadzono niepoprawne dane',
+        );
+      });
   }
 
   logout(): void {
-    this.user = null;
     this.isLoggedIn$.next(false);
-
     this.persistanceService.set('isLoggedIn', false);
-  }
 
-  getUser(): any {
-    return {
-      ...this.user,
-    };
+    this.toastService.showInfoMessage(ToastStatus.INFO, '', 'Wylogowano pomyślnie');
   }
 
   getIsLoggedIn$(): Observable<boolean> {

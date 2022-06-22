@@ -8,6 +8,7 @@ import {
 } from '@angular/router';
 import { GuardErrorMessage } from '@auth/constants/guard-message';
 import { AuthService } from '@auth/services/auth.service';
+import { ToastService } from '@services/toast.service';
 import { MessageService } from 'primeng/api';
 import { map, Observable, tap } from 'rxjs';
 
@@ -18,7 +19,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private messageService: MessageService,
+    private toastService: ToastService,
   ) {}
 
   canActivate():
@@ -30,7 +31,11 @@ export class AuthGuard implements CanActivate {
       tap((isLoggedIn) => {
         if (!isLoggedIn) {
           this.router.navigate(['/']);
-          this.messageService.add(GuardErrorMessage);
+          this.toastService.showInfoMessage(
+            GuardErrorMessage.severity,
+            GuardErrorMessage.detail,
+            GuardErrorMessage.summary,
+          );
         }
       }),
     );
