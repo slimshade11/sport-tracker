@@ -10,17 +10,13 @@ import { Observable, takeUntil } from 'rxjs';
   styleUrls: ['./past-trainings.component.scss'],
 })
 export class PastTrainingsComponent extends DestroyComponent implements OnInit {
-  passedExercises$: Observable<Exercise[]> =
-    this.trainignService.getPastExercises$();
+  passedExercises$: Observable<Exercise[]> = this.trainignService.getPastExercises$();
 
   constructor(private trainignService: TrainingService) {
     super();
   }
 
   ngOnInit(): void {
-    this.trainignService
-      .fetchFinishedTrainings()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe();
+    this.trainignService.fetchFinishedTrainings().pipe(takeUntil(this.destroy$)).subscribe();
   }
 }

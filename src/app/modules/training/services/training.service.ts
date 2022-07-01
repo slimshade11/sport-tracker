@@ -10,12 +10,8 @@ import { Subject, BehaviorSubject, Observable, tap } from 'rxjs';
 })
 export class TrainingService {
   public exerciseChanged$: Subject<Exercise | null> = new Subject<Exercise | null>();
-  private fetchedExercises$: BehaviorSubject<Exercise[]> = new BehaviorSubject<
-    Exercise[]
-  >([]);
-  private passedExercises$: BehaviorSubject<Exercise[]> = new BehaviorSubject<
-    Exercise[]
-  >([]);
+  private fetchedExercises$: BehaviorSubject<Exercise[]> = new BehaviorSubject<Exercise[]>([]);
+  private passedExercises$: BehaviorSubject<Exercise[]> = new BehaviorSubject<Exercise[]>([]);
   private currentExercise!: Exercise | null;
 
   constructor(private db: AngularFirestore) {}
@@ -39,9 +35,7 @@ export class TrainingService {
   }
 
   startExercise(selectedId: string): void {
-    this.currentExercise = this.fetchedExercises$
-      .getValue()
-      .find((exercise: Exercise) => exercise.id === selectedId)!;
+    this.currentExercise = this.fetchedExercises$.getValue().find((exercise: Exercise) => exercise.id === selectedId)!;
 
     this.exerciseChanged$.next({ ...this.currentExercise! });
   }
@@ -53,7 +47,7 @@ export class TrainingService {
       state: ExerciseState.COMPLETED,
     };
 
-    this.addDataToDataBase(newExercise);
+    this.addExerciseToDataBase(newExercise);
 
     this.currentExercise = null;
     this.exerciseChanged$.next(null);
@@ -68,17 +62,14 @@ export class TrainingService {
       state: ExerciseState.CANCELLED,
     };
 
-    this.addDataToDataBase(newExercise);
+    this.addExerciseToDataBase(newExercise);
 
     this.currentExercise = null;
     this.exerciseChanged$.next(null);
   }
 
   updateExercises(newExercise: Exercise): void {
-    const updatedExercises: Exercise[] = [
-      ...this.passedExercises$.getValue(),
-      newExercise,
-    ];
+    const updatedExercises: Exercise[] = [...this.passedExercises$.getValue(), newExercise];
 
     this.passedExercises$.next(updatedExercises);
   }
@@ -95,7 +86,7 @@ export class TrainingService {
     return this.fetchedExercises$.asObservable();
   }
 
-  private addDataToDataBase(exercise: Exercise): void {
+  private addExerciseToDataBase(exercise: Exercise): void {
     this.db.collection(Trainings.FINISHED_EXERCISES).add(exercise);
   }
 }

@@ -11,9 +11,7 @@ import { ToastStatus } from '@enums/toast-status.enum';
   providedIn: 'root',
 })
 export class AuthService {
-  private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false,
-  );
+  private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private router: Router,
@@ -26,47 +24,30 @@ export class AuthService {
     this.authFire
       .createUserWithEmailAndPassword(authData.email, authData.password)
       .then((result) => {
-        this.toastService.showInfoMessage(
-          ToastStatus.SUCCESS,
-          'Sukces',
-          'Rejestracja przebiegła pomyślnie',
-        );
+        this.toastService.showInfoMessage(ToastStatus.SUCCESS, 'Sukces', 'Rejestracja przebiegła pomyślnie');
         this.authSuccess();
       })
       .catch((error) => {
-        this.toastService.showInfoMessage(
-          ToastStatus.ERROR,
-          'Błąd',
-          'Formularz został niepoprawnie wypełniony',
-        );
+        this.toastService.showInfoMessage(ToastStatus.ERROR, 'Błąd', 'Wprowadzono niepoprawne dane');
       });
   }
 
   login(authData: AuthData): void {
     this.authFire
       .signInWithEmailAndPassword(authData.email, authData.password)
-      .then((result) => {
-        this.toastService.showInfoMessage(
-          ToastStatus.SUCCESS,
-          'Sukces!',
-          'Zalogowano pomyślnie',
-        );
+      .then(() => {
+        this.toastService.showInfoMessage(ToastStatus.SUCCESS, 'Sukces!', 'Zalogowano pomyślnie');
         this.authSuccess();
       })
-      .catch((error) => {
-        console.log(error);
-        this.toastService.showInfoMessage(
-          ToastStatus.ERROR,
-          'Błąd',
-          'Wprowadzono niepoprawne dane',
-        );
+      .catch(() => {
+        this.toastService.showInfoMessage(ToastStatus.ERROR, 'Błąd', 'Wprowadzono niepoprawne dane');
       });
   }
 
   logout(): void {
     this.isLoggedIn$.next(false);
     this.persistanceService.set('isLoggedIn', false);
-
+    this.authFire.signOut();
     this.toastService.showInfoMessage(ToastStatus.INFO, '', 'Wylogowano pomyślnie');
   }
 
@@ -78,6 +59,7 @@ export class AuthService {
     this.isLoggedIn$.next(true);
     this.persistanceService.set('isLoggedIn', true);
     this.router.navigate(['/training']);
+    this.isLoggedIn$.next(true);
   }
 
   getIsLoggedIn(): void {

@@ -13,13 +13,9 @@ import { Exercise } from '@training/interfaces/exercise.interface';
 })
 export class NewTrainingComponent extends DestroyComponent implements OnInit {
   form!: UntypedFormGroup;
-  trainingList$: Observable<Exercise[] | null> =
-    this.trainingService.getFetchedExercises$();
+  trainingList$: Observable<Exercise[] | null> = this.trainingService.getFetchedExercises$();
 
-  constructor(
-    private trainingService: TrainingService,
-    private newTrainingFormService: NewTrainingFormService,
-  ) {
+  constructor(private trainingService: TrainingService, private newTrainingFormService: NewTrainingFormService) {
     super();
   }
 

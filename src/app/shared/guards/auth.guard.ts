@@ -1,32 +1,17 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { CanActivate, Router, UrlTree } from '@angular/router';
+import { Observable, tap } from 'rxjs';
 import { GuardErrorMessage } from '@auth/constants/guard-message';
 import { AuthService } from '@auth/services/auth.service';
 import { ToastService } from '@services/toast.service';
-import { MessageService } from 'primeng/api';
-import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private toastService: ToastService,
-  ) {}
+  constructor(private authService: AuthService, private router: Router, private toastService: ToastService) {}
 
-  canActivate():
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.getIsLoggedIn$().pipe(
       tap((isLoggedIn) => {
         if (!isLoggedIn) {
